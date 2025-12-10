@@ -56,7 +56,7 @@ db = db.getSiblingDB('sample_mflix');
 // const moviesEx4 = db.movies
 // .find({
 //     actors: {
-//         $all: ["Chris O'Donnell", "Matt Damon"]
+//         $all: ["Chris O\'Donnell", "Matt Damon"]
 //     }
 // })
 
@@ -86,6 +86,7 @@ db = db.getSiblingDB('sample_mflix');
 // .limit(1);
 // console.log(oldestMovie);
 
+
 // Exercice : 7
 
 //Qui ont une note supérieur à 8 et un rating supérieur à 8 des critiques
@@ -93,7 +94,7 @@ db = db.getSiblingDB('sample_mflix');
 // .find({
 //     $and : [
 //         {"imdb.rating": { $gt :8}},
-//         {'metacritic' : { $gt:8}}
+//         {'tomatoes.critic.rating' : { $gt:8}}
 //     ]
     
 // })
