@@ -4,17 +4,20 @@ db = db.getSiblingDB('sample_mflix');
 
 
 
-// Exercice : 7
 
-//Qui ont une note supérieur à 8 et un rating supérieur à 8 des critiques
-const moviesEx7 = db.movies
+
+// Exercice 8
+
+// Qui ne sont jamais sortis 
+
+const moviesEx8 = db.movies
 .find({
-    $and : [
-        {"imdb.rating": { $gt :8}},
-        {'metacritic' : { $gt:8}}
-    ]
-    
+    released: {$exists: false}
 })
+.projection({
+    title: 1,
+    _id: 0
+});
 
-console.log(moviesEx7);
+console.log(moviesEx8);
 
