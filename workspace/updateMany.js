@@ -4,6 +4,9 @@ db = db.getSiblingDB('technocite');
 
 const students = db.students.find();
 
+
+
+
 console.log(students)
 
 
