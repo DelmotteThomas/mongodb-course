@@ -6,15 +6,15 @@ db = db.getSiblingDB('sample_mflix');
 
 
 
-// Exercice : 5
-//Réalisés par Neil Burger ou Brad Furman
-const moviesEx5 = db.movies
-.find({
-    $or:[
-        { directors :'Neil Burger'},
-        { directors : 'Brad Furman'}
 
-        ]
-})
-console.log(moviesEx5);
+//Exercice : 6
+// Trouver le film le plus anciens
+
+const oldestMovie = db.movies
+.find()
+.sort({ released: 1 })
+.limit(1);
+console.log(oldestMovie);
+
+
 
