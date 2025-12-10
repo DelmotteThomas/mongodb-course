@@ -1,26 +1,24 @@
 let db = connect("mongodb://root:test123@localhost:27017?authSource=admin");
 // USE technocite
-db = db.getSiblingDB('technocite');
+db = db.getSiblingDB('sample_mflix');
 
-
-let students = db.students.find({
-    name: {
-        $ne: "Fred",
-        $eq: "Jammy"
+const movies = db.movies.find({
+    genres: {
+        $all: ["Romance", "War"]
     }
 });
 
-db.students.insertOne({
-    name: "Thibault",
-    notes: {
-        geography: 5
+
+// SELECT title FROM movies WHERE releadsed is NULL
+const moviesExists = db.movies.find({
+    released:  {
+        $exists: false
     }
 })
-
-students = db.students.find({
-    "notes.geography": {
-        $in: [1,2]
-    }
+.projection({
+    title: 1,
 });
 
-console.log(students);
+console.log(movies);
+
+console.log(moviesExists);
