@@ -4,17 +4,17 @@ db = db.getSiblingDB('sample_mflix');
 
 
 
+// Exercice : 7
 
+//Qui ont une note supérieur à 8 et un rating supérieur à 8 des critiques
+const moviesEx7 = db.movies
+.find({
+    $and : [
+        {"imdb.rating": { $gt :8}},
+        {'metacritic' : { $gt:8}}
+    ]
+    
+})
 
-
-//Exercice : 6
-// Trouver le film le plus anciens
-
-const oldestMovie = db.movies
-.find()
-.sort({ released: 1 })
-.limit(1);
-console.log(oldestMovie);
-
-
+console.log(moviesEx7);
 
