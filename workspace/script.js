@@ -6,17 +6,15 @@ db = db.getSiblingDB('sample_mflix');
 
 
 
-// Exercice : 4
-
-// Dans lesquels ont joué conjointement Chris O'Donnellet Matt Damon
-const moviesEx4 = db.movies
+// Exercice : 5
+//Réalisés par Neil Burger ou Brad Furman
+const moviesEx5 = db.movies
 .find({
-    actors: {
-        $all: ["Chris O'Donnell", "Matt Damon"]
-    }
+    $or:[
+        { directors :'Neil Burger'},
+        { directors : 'Brad Furman'}
+
+        ]
 })
-
-
-
-console.log(moviesEx4);
+console.log(moviesEx5);
 
