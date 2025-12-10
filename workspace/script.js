@@ -5,15 +5,18 @@ db = db.getSiblingDB('sample_mflix');
 
 
 
-// Exercice : 3
-// sortis entre 2002 et 2008
-const moviesEx3 = db.movies
+
+// Exercice : 4
+
+// Dans lesquels ont joué conjointement Chris O'Donnellet Matt Damon
+const moviesEx4 = db.movies
 .find({
-    released: {
-        $gte: ISODate("2002-01-01T00:00:00Z"),
-        $lte: ISODate("2008-12-31T23:59:59Z")
+    actors: {
+        $all: ["Chris O'Donnell", "Matt Damon"]
     }
 })
 
 
-console.log(moviesEx3);
+
+console.log(moviesEx4);
+
