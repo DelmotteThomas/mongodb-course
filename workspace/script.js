@@ -17,7 +17,14 @@ const moviesExists = db.movies.find({
 })
 .projection({
     title: 1,
+    year: true,
+    _id: 0
+})
+
+.sort({
+    title: 1
 });
+
 
 console.log(movies);
 
