@@ -24,6 +24,10 @@ const result = db.movies.aggregate ([
 
       }
     },
+    // Trier par ordre décroissant
+    { 
+      $sort : { count : -1 }
+    },
     {
         $limit: 10
     },
@@ -35,10 +39,10 @@ const result = db.movies.aggregate ([
     }
 ]);
 
-console.log(result);
+    console.log(result);
 
-const lameDirectors = db.lame_directors.find().toArray();
-console.log(lameDirectors);
+const lameDirectors = db.lame_directors.find();
+      console.log(lameDirectors);
 
 
 
