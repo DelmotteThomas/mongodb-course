@@ -1,76 +1,23 @@
-const { act } = require("react");
-
 let db = connect("mongodb://root:test123@localhost:27017?authSource=admin");
 
-db = db.getSiblingDB("sample_mflix");
+/**
+ * {
+        date: ISODate('2001-02-09T00:00:00.000Z'),
+        amount: 5286,
+        transaction_code: 'sell',
+        symbol: 'nvda',
+        price: '6.84957187854324356379720484255813062191009521484375',
+        total: '36206.83694997958547823202480'
+      }
+*/
+db = db.getSiblingDB('sample_analytics');
 
-// Augmenter la note IMDB des critiques de 5 pour tous
-// les films dans lesquels a joué Charlize Theron.
+const result = db.transactions.aggregate([
+    {
+        $match: {
+            account_id: 170945
+        }
+    }
+])
 
-// trouver les films avec Charlize Theron
-const charlizeMovies = db.movies.find({
-  cast: "Charlize Theron",
-});
-//console.log(charlizeMovies);
-
-const updateResult = db.movies.updateMany(
-  {
-    cast: "Charlize Theron",
-  },
-  {
-    $inc: { "imdb.rating": 5 },
-  }
-);
-
-const updatedMovies = db.movies.find({
-  actors: "Charlize Theron",
-});
-//console.log(updatedMovies);
-
-//Supprimer les films réalisés par Harald Zwart
-
-const deleteResult = db.movies.deleteMany({
-  directors: "Harald Zwart",
-});
-
-// Ajouter l'acteur Key Key aux films "+1" et "Anamorph"
-
-
-
-
-const addKeyKeyToMovies = db.movies.updateMany(
-  {
-    title: { $in: ["+1", "Anamorph"] },
-  },
-  {
-    $push: {
-      cast: "Key Key",
-    },
-  },
-  {
-    upsert: true,
-  }
-);
-
-console.log(replaceKeyKey);
-
-// Supprimmez "Keanu Reeves" de "The Matrix".
-db.movies.updateOne({
-    title:"The Matrix"
-}, {$pull:{
-    cast:'Keanu Reeves'
-}
-}); 
-
-// Remplacez "Jurassic Park" par le film "The Matrix"
-const matrix = db.movies.findOne({
-    title: "The Matrix"
-});
-console.log(matrix);
-
-const jurassic  = db.movies.replaceOne({
-    title: "Jurassic Park"
-}, {
-    title: "The Matrix",
-}  );
-console.log(jurassic);
+console.log(result);
