@@ -19,9 +19,12 @@ const addressSchema = new Schema({
     }
 })
 
-
 const schema = new Schema({
-    name: {
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
         type: String,
         required: true
     },
@@ -42,6 +45,16 @@ const schema = new Schema({
     address: {
         type: addressSchema
     }
+}, {
+    methods: {
+        getFullName() {
+            if (!this.firstName || !this.lastName) {
+                return 'Anonymous';
+            }
+            return this._id + ' ' + this.firstName + ' ' + this.lastName;
+        }
+    },
+    
 });
 
 export const UserModel = model("users", schema);
