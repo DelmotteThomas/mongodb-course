@@ -15,6 +15,8 @@ async function init() {
         name: "Bowen Marsh"
     });
 
+      
+
     const newUser = new UserModel({
         name: "Jean Jacques",
         email: "Jean@Test.eu",
@@ -31,7 +33,7 @@ async function init() {
 
     await newUser.save();
 
-    //console.log(users);
+    console.log(users);
 
     const movies = await MovieModel.findOne({
         title: "The Godfather"
@@ -67,7 +69,64 @@ async function init() {
 
     await newMovie.save();
     console.log("Nouveau film ajouté :", newMovie);
-  
+
+
+     const newMovieAction = new MovieModel({
+        plot: " A skilled thief is offered a chance to have his past crimes forgiven, by implanting another person's idea into a target's subconscious.",
+        genres: [ "Comedy" ],
+        runtime: 175,
+        cast: [ "Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page" ],
+        title: "Inception",
+        fullplot: " A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
+        counries: [ "USA" ],
+        released: 2010  ,
+        directors: [ "Christopher Nolan" ],
+        rated: "PG-18",
+        awards: {
+            wins: 152 ,
+            nominations: 204 ,
+            text: "Won 4 Oscars. Another 152 wins & 204 nominations."
+        },
+        lastupdated: new Date("2018-08-26 00:03:50.123000000"),
+        year: 2010,
+        imdb: {
+            rating: 8.8,
+            votes: 2000000,
+            id: 27205
+        },
+        type: "movie"
+    });
+
+    await newMovieAction.save();
+    console.log("Nouveau film ajouté :", newMovieAction);
+
+
+      const matrix = await MovieModel.findOne({
+        title: "The Matrix"
+        
+        });
+
+        // Changer le titre du film matrix
+        if (matrix) {
+            matrix.title = "The Matrique";
+            await matrix.save();
+            console.log("Film mis à jour :", matrix);
+        }
+
+        const jurassic = await MovieModel.findOne(
+            { 
+                title: "Jurassic Park" },
+            
+        );
+
+        // Delete via le modele
+        await jurassic?.deleteOne();
+        console.log("Film supprimé :", jurassic);
+
+        // delete  via la collection
+
+        await MovieModel.deleteOne({ title: "Jurassic Park" });
+        
 }
 
 
